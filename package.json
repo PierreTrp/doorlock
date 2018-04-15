@@ -1,0 +1,15 @@
+{
+  "name": "doorlock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "wiringpi-node": "^2.4.4",
+    "MFRC522-node": "^1.0.5"
+  }
+}
