@@ -4,26 +4,7 @@
 //Developed on Linux raspberrypi 4.14.33-v7+ #1109 SMP Tue Apr 10 17:28:38 BST 2018 armv7l GNU/Linux (8 Jessie)
 
 
-/////////////////////////////////////////////// RFID READER
-//https://pimylifeup.com/raspberry-pi-rfid-rc522/
-var mfrc522 = require("MFRC522-node");
-var RFID = function(){
 
-    this.onStart = function(){
-        console.log('RFID started');
-    };
-
-    this.onUid = function(uid){
-        console.log('RFID detected: ' + uid);
-        openDoor();
-    };
-
-    this.onExit = function(){
-        console.log('RFID exited');
-    };
-};
-
-mfrc522.start( new RFID() );
 
 
 
@@ -84,4 +65,23 @@ setInterval(function(){
 */
 
 
+/////////////////////////////////////////////// RFID READER
+//https://pimylifeup.com/raspberry-pi-rfid-rc522/
+var mfrc522 = require("MFRC522-node");
+var RFID = function(){
 
+    this.onStart = function(){
+        console.log('RFID started');
+    };
+
+    this.onUid = function(uid){
+        console.log('RFID detected: ' + uid);
+        openDoor();
+    };
+
+    this.onExit = function(){
+        console.log('RFID exited');
+    };
+};
+
+mfrc522.start( new RFID() );
