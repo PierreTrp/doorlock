@@ -1,6 +1,8 @@
 //node v8.9.4 required
 //do not use "wiring-pi", use "wiringpi-node"
 
+//Developed on Linux raspberrypi 4.14.33-v7+ #1109 SMP Tue Apr 10 17:28:38 BST 2018 armv7l GNU/Linux (8 Jessie)
+
 
 /////////////////////////////////////////////// RFID READER
 var mfrc522 = require("MFRC522-node");
