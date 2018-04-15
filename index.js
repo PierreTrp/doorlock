@@ -2,28 +2,28 @@
 //do not use "wiring-pi", use "wiringpi-node"
 
 
+/////////////////////////////////////////////// RFID READER
 var mfrc522 = require("MFRC522-node");
-
-var Callback = function(){
+var RFID = function(){
 
     this.onStart = function(){
-        console.log('onStart');
+        console.log('RFID started');
     };
 
     this.onUid = function(uid){
-        console.log('onUid');
-        console.log(uid);
+        console.log('RFID detected: ' + uid);
     };
 
     this.onExit = function(){
-        console.log('onExit');
+        console.log('RFID exited');
     };
 };
-mfrc522.start( new Callback() );
+
+mfrc522.start( new RFID() );
 
 
 
-
+/////////////////////////////////////////////// MANUAL BUTTON
 var wpi = require('wiringpi-node');
 
 // GPIO pin of the button
@@ -36,6 +36,7 @@ var clock = null;
 wpi.pinMode(configPin, wpi.INPUT);
 wpi.pullUpDnControl(configPin, wpi.PUD_UP);
 wpi.wiringPiISR(configPin, wpi.INT_EDGE_BOTH, function() {
+
     if (wpi.digitalRead(configPin)) {
         if (started === false) {
             started = true;
@@ -50,7 +51,7 @@ wpi.wiringPiISR(configPin, wpi.INT_EDGE_BOTH, function() {
 
 function handleButton() {
     if (wpi.digitalRead(configPin)) {
-        console.log('OK');
+        console.log('Manual button pressed');
     }
 }
 
