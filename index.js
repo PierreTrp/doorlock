@@ -38,6 +38,10 @@ wpi.pullUpDnControl(configPin, wpi.PUD_UP);
 wpi.wiringPiISR(configPin, wpi.INT_EDGE_BOTH, function() {
 
     if (wpi.digitalRead(configPin)) {
+        console.log('Pushed');
+    }
+    /*
+    if (wpi.digitalRead(configPin)) {
         if (started === false) {
             started = true;
             clock = setTimeout(handleButton, 500);
@@ -46,14 +50,14 @@ wpi.wiringPiISR(configPin, wpi.INT_EDGE_BOTH, function() {
     else {
         started = false;
         clearTimeout(clock);
-    }
+    }*/
 });
-
+/*
 function handleButton() {
     if (wpi.digitalRead(configPin)) {
         console.log('Manual button pressed');
     }
 }
-
+*/
 
 
