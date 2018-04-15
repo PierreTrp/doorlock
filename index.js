@@ -5,6 +5,7 @@
 
 
 /////////////////////////////////////////////// RFID READER
+//https://pimylifeup.com/raspberry-pi-rfid-rc522/
 var mfrc522 = require("MFRC522-node");
 var RFID = function(){
 
@@ -14,6 +15,7 @@ var RFID = function(){
 
     this.onUid = function(uid){
         console.log('RFID detected: ' + uid);
+        openDoor();
     };
 
     this.onExit = function(){
@@ -36,7 +38,50 @@ wpi.pullUpDnControl(configPin, wpi.PUD_UP);
 wpi.wiringPiISR(configPin, wpi.INT_EDGE_BOTH, function() {
     if (wpi.digitalRead(configPin)) {
         console.log('Manual button pushed');
+        openDoor();
     }
 });
+
+
+
+/////////////////////////////////////////////// SERVO CONTROL
+var Gpio = require('pigpio').Gpio;
+var motor = new Gpio(17, {mode: Gpio.OUTPUT});
+
+function openDoor() {
+
+    console.log('Opening door');
+    motor.servoWrite(1000);
+
+    setTimeout(function() {
+
+        console.log('Closing door automatically after 3 sec');
+        closeDoor();
+    },3000);
+}
+
+
+function closeDoor() {
+    motor.servoWrite(2000);
+}
+
+
+
+
+/*
+setInterval(function(){
+
+
+    if(motor.getServoPulseWidth() == 1000) {
+        motor.servoWrite(2000);
+    }
+    else {
+        motor.servoWrite(1000);
+    }
+
+}, 1000);
+
+*/
+
 
 
