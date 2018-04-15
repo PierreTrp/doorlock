@@ -4,10 +4,6 @@
 //Developed on Linux raspberrypi 4.14.33-v7+ #1109 SMP Tue Apr 10 17:28:38 BST 2018 armv7l GNU/Linux (8 Jessie)
 
 
-
-
-
-
 /////////////////////////////////////////////// MANUAL BUTTON
 var wpi = require('wiringpi-node');
 
@@ -36,7 +32,7 @@ function openDoor() {
 
     setTimeout(function() {
 
-        console.log('Closing door automatically after 3 sec');
+        console.log('Closing door automatically after 3 sec (we will improve this later and close the door only after contact is made with the wall');
         closeDoor();
     },3000);
 }
@@ -67,6 +63,11 @@ setInterval(function(){
 
 /////////////////////////////////////////////// RFID READER
 //https://pimylifeup.com/raspberry-pi-rfid-rc522/
+
+var allowedRFID = {
+    '137,58,84,163':true
+}
+
 var mfrc522 = require("MFRC522-node");
 var RFID = function(){
 
@@ -76,7 +77,14 @@ var RFID = function(){
 
     this.onUid = function(uid){
         console.log('RFID detected: ' + uid);
-        openDoor();
+
+        if(allowedRFID[uid] != undefined && allowedRFID[uid]) {
+            openDoor();
+        }
+        else{
+            console.log('This RFID is not allowed in our database');
+        }
+
     };
 
     this.onExit = function(){
