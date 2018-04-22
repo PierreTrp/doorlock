@@ -1,6 +1,10 @@
 //node v8.9.4 required
 //do not use "wiring-pi", use "wiringpi-node"
 
+//BUGS &  SOLUTIONS :
+//Hardware problems > edit the package who use wiring-pi and put wiringpi-node in the require instead
+//Build error > change node version to v8.9.4
+
 //Developed on Linux raspberrypi 4.14.33-v7+ #1109 SMP Tue Apr 10 17:28:38 BST 2018 armv7l GNU/Linux (8 Jessie)
 
 
